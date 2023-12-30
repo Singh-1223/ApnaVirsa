@@ -3,8 +3,9 @@ const express = require('express');
 const cors = require('cors');
 
 const bodyParser = require('body-parser');
-const bookspath = require('./routes/books');
 
+const bookspath = require('./routes/books');
+const adminpath = require('./routes/admin');
 
 connectToMongo();
 
@@ -17,6 +18,9 @@ app.use(bodyParser.json()); // Make sure this line is present
 
 //pdf, books paths/routes
 app.use('/',bookspath);
+
+//admin routes , login , dashboard ,requests
+app.use('/',adminpath);
 
 app.listen(port,()=>{
     console.log(`Backend at port http://localhost:${port}`)

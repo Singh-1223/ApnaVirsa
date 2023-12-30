@@ -44,9 +44,32 @@ router.post("/api/uploadbook", upload.single("pdfFile"), async (req, res) => {
   }
 });
 
+// get all approved books, available to all
 router.get("/books", async (req, res) => {
   try {
-    const books = await Book.find({}); // Retrieve all books
+    const books = await Book.find({requestStatus: 'approved' }); // Retrieve all books
+    res.json(books);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error fetching books" });
+  }
+});
+
+// all the pending books, to be handled by admin
+router.get("/pendingbooks", async (req, res) => {
+  try {
+    const books = await Book.find({requestStatus: 'pending' }); // Retrieve all books
+    res.json(books);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error fetching books" });
+  }
+});
+
+//all the rejected books,
+router.get("/rejectedbooks", async (req, res) => {
+  try {
+    const books = await Book.find({requestStatus: 'rejected' }); // Retrieve all books
     res.json(books);
   } catch (err) {
     console.error(err);
