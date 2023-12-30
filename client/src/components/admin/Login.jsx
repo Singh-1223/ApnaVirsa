@@ -16,7 +16,7 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    console.log(import.meta.env.VITE_REACT_API_HOST_URL);
+    // console.log(import.meta.env.VITE_REACT_API_HOST_URL);
     const response = await fetch(`${import.meta.env.VITE_REACT_API_HOST_URL}/adminlogin`, {
       method: 'POST',
       headers: {
@@ -28,7 +28,7 @@ const AdminLogin = () => {
       }),
     });
     const json = await response.json();
-    // console.log(json);
+    console.log(json);
     if (json.success) {
       toast.success('Logged In! Redirecting...', {
         position: 'top-right',

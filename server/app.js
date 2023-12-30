@@ -12,8 +12,12 @@ connectToMongo();
 const app = express();
 const port = 5000;
 
+// Enable CORS middleware with multiple origins
+app.use(cors({
+    origin: ['http://localhost:5173', 'https://apnavirsa.vercel.app'] // Allow requests from these origins
+  }));
+
 app.use(express.json());
-app.use(cors());
 app.use(bodyParser.json()); // Make sure this line is present
 
 //pdf, books paths/routes
